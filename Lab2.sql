@@ -40,7 +40,9 @@ order by amount asc limit 5 ;
 #Query 8
 #What are the unique values of k_symbol in the order table?
 select * from `order`;
-select distinct (k_symbol) from `order`;
+select distinct (k_symbol) from `order`
+where k_symbol <> ""
+order by k_symbol asc;
 
 #Query 9
 #In the order table, what are the order_ids of the client with the account_id 34?
@@ -95,6 +97,15 @@ order by sum(amount) desc limit 10;
 
 #Query 16
 #In the loan table, retrieve the number of loans issued for each day, before (excl) 930907, ordered by date in descending order.
+select * from loan;
+select `date`, count(loan_id)
+from loan
+where `date` < 930907
+group by `date`
+order by date desc;
+
+#Query 17
+#In the loan table, for each day in December 1997, count the number of loans issued for each unique loan duration, ordered by date and duration, both in ascending order. You can ignore days without any loans in your output.
 
 
 
